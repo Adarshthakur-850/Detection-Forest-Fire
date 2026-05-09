@@ -1,3 +1,5 @@
+
+
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 import cv2
@@ -8,6 +10,7 @@ import tensorflow as tf
 import os
 import sys
 
+
 # Add project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -16,6 +19,13 @@ MODEL_PATH = "models/fire_model.h5"
 app = FastAPI(title="Forest Fire Detection API")
 
 # Load model globally
+
+model = None
+
+def load_model():
+    global model
+    print(model)   # only reading, not assigning
+
 model = None
 
 @app.on_event("startup")
